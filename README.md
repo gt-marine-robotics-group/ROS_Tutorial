@@ -548,7 +548,7 @@ The linear acceleration field of the IMU is composed of a 3D vector, representin
 In seperate terminals, run the following:
 
 ```
-ros2 launch stinger_bringup vehicile_sim.launch.py
+ros2 launch stinger_bringup vehicle_sim.launch.py
 ros2 topic echo /stinger/imu/data --field linear_acceleration --no-arr --once
 ```
 
@@ -577,7 +577,7 @@ In `question_4_3.py`, look at the `transfrom_imu(self, msg: Imu)` function. It i
 In seperate terminals, run the following:
 
 ```
-ros2 launch stinger_bringup vehicile_sim.launch.py
+ros2 launch stinger_bringup vehicle_sim.launch.py
 ros2 run student_code question_4_3
 ros2 topic echo /debug --field linear_acceleration --no-arr --once
 ```
