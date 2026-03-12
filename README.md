@@ -180,7 +180,7 @@ The goal of this section is to familiarize yourself with the concept of nodes an
 #### 1.1.a Nodes
 **Nodes:** A node in ROS2 represents a process that performs computation, such as sensing, control, planning, or actuation, and typically communicates with other nodes using the ROS2 communication framework. 
 
-First in your terminal, run `ros2 node list`. This will list all running nodes. You should currently have 0 running nodes. Now, in the terminal, run `ros2 run helpers node_q_1_1`. After you run the node, how many nodes are now running? Change the value of `num_nodes` (in ```question_1_1.py```) to the new number of nodes. 
+First in your terminal, run `ros2 node list`. This will list all running nodes. You should currently have 0 running nodes. Now, in the terminal, run `ros2 run helpers node_q_1_1`. Note that this process will block, so you'll need to run further commands in a separate terminal. After you run the node, how many nodes are now running? Change the value of `num_nodes` (in ```question_1_1.py```) to the new number of nodes. 
 
 #### 1.1.b Node Names
 Change the value of `first_node_name` to the name of the first node. Make sure you include the starting ```/```.
