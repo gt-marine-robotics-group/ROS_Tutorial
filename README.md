@@ -159,7 +159,7 @@ colcon build
 source install/setup.bash
 ros2 run autograder test_topic_{topic_number}_{topic_subsection}
 ```
-For example, to run the tests for ```topic 1.2```, you should run `ros2 run autograder test_topic_1_2`. 
+TO RUN AUTOGRADER: For example, to run the tests for ```topic 1.2```, you should save your code, run `colcon build`, and run `ros2 run autograder test_topic_1_2`. 
 
 **Note:** Make sure nothing is running in the background when running the autograder tests. Any background processes may mess up the autograder.
 
