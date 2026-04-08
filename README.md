@@ -1091,6 +1091,7 @@ This section goes through configuring the OS by flashing the microSD card with U
   8. Type `ifconfig` in the terminal and note the IP address.
   9. To enable SSH on the Pi, enter the following in the terminal:
       ```
+        sudo apt update
         sudo apt install raspi-config
         sudo apt install openssh-server
         sudo raspi-config
