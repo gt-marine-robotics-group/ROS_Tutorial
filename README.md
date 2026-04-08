@@ -1084,7 +1084,7 @@ This section goes through configuring the OS by flashing the microSD card with U
   3. Set the username to `tugxx`, with `xx` be you team number. If you are team 5, it will be `tug05`. Please set the password to `boats0519`.
   4. To give the tug a static IP address, we need to be talking to a travel router that talks to GTother (for example). We have router GLiNet AX3000 in lab. So basically, `GTother` (if you needs internet) -> `Router` -> both your laptop and tug is connected to `Router` -> can `ssh`
   - This means connect your Pi via ethernet to the GLiNet router.
-  5. Set a static ip to connect to router on boot.
+  5. Set a static ip to connect to router on boot. Use the ip 192.168.2.2xx where xx is your team number.
     Run the following command to edit your Pi's network plan
     
     `sudo nano /etc/netplan/01-network-manager-all.yaml`
@@ -1097,7 +1097,7 @@ This section goes through configuring the OS by flashing the microSD card with U
         eth0:
           dhcp4: no
           addresses:
-            - 192.168.2.213/24
+            - 192.168.2.2<your team number>/24
           routes:
             - to: default
               via: 192.168.2.5
