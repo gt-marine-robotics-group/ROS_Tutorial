@@ -1118,6 +1118,7 @@ This section goes through configuring the OS by flashing the microSD card with U
         sudo apt install raspi-config
         sudo apt install openssh-server
         sudo raspi-config
+        sudo iw dev wlan0 set power_save off
       ```
   10. After the UI pops up, select Interfacing Options, then `ssh`, click Yes. 
   11. Also under Interfacing Options, select `I2C`, and enable it as well. Repeat and select `Serial Port`, disable console but enable hardware.
