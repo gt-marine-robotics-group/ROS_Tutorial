@@ -1157,6 +1157,7 @@ This section goes through configuring the OS by flashing the microSD card with U
    Ping the GLiNet router to ensure your Pi can talk to the local network.
    ```bash
    ping -I wlx<interface-id> -c 4 192.168.2.5
+   ```
 <hr>
 
     
