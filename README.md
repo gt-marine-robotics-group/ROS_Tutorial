@@ -1168,7 +1168,7 @@ This section goes through configuring the OS by flashing the microSD card with U
 <summary><strong>8.2 Custom Setup in Pi</strong></summary>
 
 <hr>
-```
+
 
 #### 8.2.a git CLI
   You are on your laptop that is ssh-ed into the Stinger Raspberry Pi.
