@@ -1116,7 +1116,7 @@ This section goes through configuring the OS by flashing the microSD card with U
 5. Install the Wi-Fi adapter drivers by entering the following into the terminal:
   ```bash
     cd ~
-    git clone [https://github.com/morrownr/8821cu-20210916.git](https://github.com/morrownr/8821cu-20210916.git)
+    git clone https://github.com/morrownr/8821cu-20210916.git
     cd 8821cu-20210916
     sudo ./install-driver.sh
     sudo reboot
@@ -1225,7 +1225,7 @@ Node name: `imu-node` (will not directly run this node, but you can run this ind
     sudo usermod -aG i2c tug1
     sudo chmod 666 /dev/i2c-1
     sudo nano /etc/udev/rules.d/99-i2c.rules
-    add line: \textit{SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"}
+    add line: SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
     sudo udevadm control --reload-rules
     sudo reboot
 ```
