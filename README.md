@@ -34,7 +34,7 @@ First, install Docker Desktop. [Installation Instructions](https://docs.docker.c
 
 **Note:** You will have to select the correct installation based on your macbook chip set (Intel/ Apple Silicone). If you have a M1, M2, M3, etc macbook, you are Apple Silicone.
 
-To setup your environment (one time step), run:
+To setup your environment (one time step), run the following command in your Terminal (use copy button):
 
 ```
 curl -O https://raw.githubusercontent.com/Jeff300fang/MRG_Docker/tutorial/mrg_tutorial_startup_mac.sh && bash mrg_tutorial_startup_mac.sh
@@ -92,7 +92,7 @@ source ~/.bashrc && newgrp docker
 
 <hr>
 
-To start the docker container, run
+To start the docker container, run the following command in your Terminal/Command Line:
 
 ```
 start_tutorial_docker
@@ -108,7 +108,7 @@ This command only needs to be run for the first time OR when new packages are in
 
 To access the container's GUI, open `localhost:6080` in your local browser.
 
-To start a 6 pane terminal (recommended), run `tmuxp load /root/.tmuxp/tmuxp_config.yaml`. To exit, run `tmux kill-session`
+To start a 6 pane terminal (recommended), run `tmuxp load /root/.tmuxp/tmuxp_config.yaml` in the GUI terminal (Terminator). To exit, run `tmux kill-session`
 
 <hr>
 
@@ -130,6 +130,7 @@ Click the extensions page on the left hand side and ensure Docker is installed. 
 <img src="assets/extensions.png" width="800"/>
 
 Then, click the blue icon in the bottom left corner. It should bring up this page.
+**Trouble shooting:** If you do not have the option to attach to a container, it is likely that your container is not running. Make sure your set up is correct and remember to reboot your computer.
 
 <img src="assets/attach_to_container.png" width="800"/>
 
@@ -180,7 +181,8 @@ The goal of this section is to familiarize yourself with the concept of nodes an
 #### 1.1.a Nodes
 **Nodes:** A node in ROS2 represents a process that performs computation, such as sensing, control, planning, or actuation, and typically communicates with other nodes using the ROS2 communication framework. 
 
-First in your terminal, run `ros2 node list`. This will list all running nodes. You should currently have 0 running nodes. Now, in the terminal, run `ros2 run helpers node_q_1_1`. After you run the node, how many nodes are now running? Change the value of `num_nodes` (in ```question_1_1.py```) to the new number of nodes. 
+First in your terminal, run `ros2 node list`. It is easiest to use the VSCode terminal. If you do not have a terminal window open go to Terminal --> New Terminal.
+This will list all running nodes. You should currently have 0 running nodes. Now, in the terminal, run `ros2 run helpers node_q_1_1`. After you run the node, how many nodes are now running? Change the value of `num_nodes` (in ```question_1_1.py```) to the new number of nodes. 
 
 #### 1.1.b Node Names
 Change the value of `first_node_name` to the name of the first node. Make sure you include the starting ```/```.
