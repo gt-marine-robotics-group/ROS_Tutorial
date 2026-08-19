@@ -1183,7 +1183,7 @@ This section goes through configuring the OS by flashing the microSD card with U
 #### 8.2.b Setup the Stinger Workspace
   First, setup the workspace by typing this in the terminal: `mkdir {workspace name}/src`
 
-  (inside src) `git clone -b {branch name} --single-branch https://github.com/gt-marine-robotics-group/stinger-software.git`
+  (inside src) `git clone -b {branch name} --single-branch https://github.com/{your_github_usrnm}/stinger-software.git`
 
   Navigate to the directory where the `requirements.txt` is located. This will install all the python library is that needed: `pip3 install -r requirements.txt`
 
