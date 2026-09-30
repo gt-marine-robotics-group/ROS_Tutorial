@@ -1443,7 +1443,7 @@ This section goes through configuring the OS by flashing the microSD card with U
 
   On the Raspberry Pi, set up Github CLI if you want conviently push your edits while field testing. You will need to log in to your account.
   
-  Follow this link for setup: [https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian](url)
+  Copy and paste this link into a new browser window for setup: [https://github.com/cli/cli/blob/trunk/docs/install_linux.md#debian](url)
 
   If you do not want you team member to commit to github on your behalf (since the group is sharing a Pi), remember to log out after using git. 
 
