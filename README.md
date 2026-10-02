@@ -26,6 +26,10 @@ Then click `Create Fork`. Repeat this process for the `ROS_Tutorial` repo as wel
 
 ## Environment Setup 
 
+The diagram below shows how the tutorial container runs on each operating system and what is included inside it.
+
+<img src="assets/environment_overview.png" alt="Tutorial environment on Linux, Mac, and Windows, with ROS 2 Jazzy and tutorial tools inside the container" width="1000"/>
+
 ### Personal Computer Setup
 
 <details> <summary><strong>Mac</strong></summary>
@@ -102,16 +106,35 @@ qix stack install ROS_Tutorial --novnc
 <details> <summary> <strong> Ubuntu / Linux</strong></summary>
 
 <hr>
-1. Install Docker and ensure your user has permission to run Docker without sudo:
+1. Install Docker and Docker Compose, then give your user permission to run Docker without sudo. **Run each command block separately and wait for it to finish before pasting the next one.**
 
 ```bash
-sudo apt update && sudo apt install -y docker.io
-sudo service docker start
-sudo usermod -aG docker $USER && newgrp docker
+sudo apt update && sudo apt install -y docker.io docker-compose-v2
 ```
+
 ```bash
-sudo apt update && sudo apt install -y docker-compose-v2
+sudo service docker start
 ```
+
+```bash
+sudo usermod -aG docker "$USER"
+```
+
+Run the following command **by itself**. It opens a new shell with Docker group permissions; wait for the new prompt before continuing:
+```bash
+newgrp docker
+```
+
+Verify Docker Compose is installed:
+```bash
+docker compose version
+```
+
+Then verify Docker can run containers without sudo:
+```bash
+docker run --rm hello-world
+```
+
 *(WSL Note: If Docker is not running after restarting your PC, run `sudo service docker start`)*
 
 2. Set up SSH keys for pulling code from GT GitHub and commercial GitHub if you have not already ([instructions below](#setting-up-ssh-keys)).
@@ -411,6 +434,8 @@ Go to the file `question_1_4_client.py`. Correctly request a `yellow_buoy` from 
 <summary><strong>2.1 Using VNC</strong></summary>
 
 <hr>
+
+**Windows (WSL2) students:** Do not use VNC. GUI applications such as Gazebo, RViz2, and rqt should render locally on your Windows desktop through [WSLg](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps). Run the commands from the container terminal and continue to **Section 2.2**.
 
 **VNC (Virtual Network Computing)** is a graphical desktop-sharing system that allows you to access another desktop's enviornment over a network.
 
