@@ -33,8 +33,8 @@ The diagram below shows how the tutorial container runs on each operating system
 
 <img src="assets/environment_overview.png" alt="Tutorial environment on Linux, Mac, and Windows, with ROS 2 Jazzy and tutorial tools inside the container" width="1000"/>
 
-- **Docker** runs the tutorial tools and dependencies inside a container so students work in a consistent environment. Learn more: [What is Docker?](https://docs.docker.com/get-started/docker-overview/)
-- **WSL (Windows Subsystem for Linux)** lets Windows students run Ubuntu and Linux commands on their computer. In this tutorial, Docker runs inside Ubuntu on WSL2. Learn more: [What is WSL?](https://learn.microsoft.com/en-us/windows/wsl/about)
+- **Docker** runs tools and dependencies in a container: an isolated environment sharing a Linux kernel, giving users a consistent setup. [What is Docker?](https://docs.docker.com/get-started/docker-overview/)
+- **WSL (Windows Subsystem for Linux)** lets Windows users run Linux alongside Windows. WSL2 runs a Linux kernel in a lightweight virtual machine, where Ubuntu and Docker run. [What is WSL?](https://learn.microsoft.com/en-us/windows/wsl/about)
 
 </details>
 
@@ -443,7 +443,7 @@ Go to the file `question_1_4_client.py`. Correctly request a `yellow_buoy` from 
 
 <hr>
 
-**Windows (WSL2) students:** Do not use VNC. GUI applications such as Gazebo, RViz2, and rqt should render locally on your Windows desktop through [WSLg](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps). Run the commands from the container terminal and continue to **Section 2.2**.
+**Windows (WSL2) users:** Do not use VNC. GUI applications such as Gazebo, RViz2, and rqt should render locally on your Windows desktop through [WSLg](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps). Run the commands from the container terminal and continue to **Section 2.2**.
 
 **VNC (Virtual Network Computing)** is a graphical desktop-sharing system that allows you to access another desktop's enviornment over a network.
 
