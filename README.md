@@ -26,9 +26,17 @@ Then click `Create Fork`. Repeat this process for the `ROS_Tutorial` repo as wel
 
 ## Environment Setup 
 
+<details>
+<summary><strong>Extra details: How the tutorial environment works</strong></summary>
+
 The diagram below shows how the tutorial container runs on each operating system and what is included inside it.
 
 <img src="assets/environment_overview.png" alt="Tutorial environment on Linux, Mac, and Windows, with ROS 2 Jazzy and tutorial tools inside the container" width="1000"/>
+
+- **Docker** runs the tutorial tools and dependencies inside a container so students work in a consistent environment. Learn more: [What is Docker?](https://docs.docker.com/get-started/docker-overview/)
+- **WSL (Windows Subsystem for Linux)** lets Windows students run Ubuntu and Linux commands on their computer. In this tutorial, Docker runs inside Ubuntu on WSL2. Learn more: [What is WSL?](https://learn.microsoft.com/en-us/windows/wsl/about)
+
+</details>
 
 ### Personal Computer Setup
 
