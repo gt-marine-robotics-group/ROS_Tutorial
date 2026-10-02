@@ -29,8 +29,6 @@ Then click `Create Fork`. Repeat this process for the `ROS_Tutorial` repo as wel
 <details>
 <summary><strong>Extra details: How the tutorial environment works</strong></summary>
 
-The diagram below shows how the tutorial container runs on each operating system and what is included inside it.
-
 <img src="assets/environment_overview.png" alt="Tutorial environment on Linux, Mac, and Windows, with ROS 2 Jazzy and tutorial tools inside the container" width="1000"/>
 
 - **Docker** runs tools and dependencies in a container: an isolated environment sharing a Linux kernel, giving users a consistent setup. [What is Docker?](https://docs.docker.com/get-started/docker-overview/)
