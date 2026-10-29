@@ -1380,35 +1380,89 @@ To start, you will need the following compute hardware:
 
 This section goes through configuring the OS by flashing the microSD card with Ubuntu 24.04 64-bit operating system, setting up ssh permission, and installing ROS2. 
 
-#### 8.1.a Operating system in the PI
-  1. Follow the instructions from the following link to flash Ubuntu 24.04 onto the microSD card: [https://ubuntu.com/download/raspberry-pi](url). Follow the `Desktop` tutorial. You need your laptop to do this.
-  2. Insert the flashed microSD card into the Raspberry Pi and connect the Pi to a monitor, keyboard, and mouse. Power the Pi, and the monitor will turn on automatically. 
-  3. Set the username to `tugxx`, with `xx` be you team number. If you are team 5, it will be `tug05`. Please set the password to `boats0519`.
-  4. To give the tug a static IP address, we need to be talking to a travel router that talks to GTother (for example). We have router GLiNet AX3000 in lab. So basically, `GTother` (if you needs internet) -> `Router` -> both your laptop and tug is connected to `Router` -> can `ssh`
-  - This means connect your Pi via ethernet to the GLiNet router.
-  5.  The router is set up for you already. Connect to wifi on your laptop: `GL-MT3000-0a9`  OR  `GL-MT3000-0a9-5G`
-  - Password: `boats0519`
-  6. Admin password for logging in from the web (DNS should be the correct IP): `@boats0519`
-  7. If steps 4-6 are too much for you right now - just connect to gtother following this website: [https://auth.lawn.gatech.edu/key/](url)
-  8. Type `ip a` in the terminal and note the IP address.
-  9. To enable SSH on the Pi, enter the following in the terminal:
-      ```
-        sudo apt update
-        sudo apt install raspi-config
-        sudo apt install openssh-server
-        sudo raspi-config
-        sudo iw dev wlan0 set power_save off
-      ```
-  10. After the UI pops up, select Interfacing Options, then `ssh`, click Yes. 
-  11. Also under Interfacing Options, select `I2C`, and enable it as well. Repeat and select `Serial Port`, disable console but enable hardware.
+#### 8.1.a Installing Ubuntu and Preparing the Pi
 
-#### 8.1.b SSH
-  1. On your laptop, type `ssh <username>@<ip address>` on the terminal. Make sure you can ping the PI before ssh.
-  2. After logging into the Pi, follow the link to install ROS2 Humble: [https://roboticsbackend.com/install-ros2-on-raspberry-pi/](url)
-  3. You should have installed `colcon` if you followed till the end of the tutorial. One more thing: `sudo apt install build-essential`
+These steps install the operating system and prepare the Raspberry Pi 4B for remote access and sensor communication. ROS 2 Jazzy is installed separately in **Section 8.1.b**.
 
+1. **On your laptop**, flash **Ubuntu 24.04 LTS Desktop (64-bit)** onto the microSD card using [Raspberry Pi Imager](https://www.raspberrypi.com/software/):
 
-#### 8.1 c Installing Wifi Adapter & Setting Static IP
+   - Install and open Raspberry Pi Imager, then insert the microSD card into your laptop's card reader.
+   - Under **Device** (or **Choose Device**), select **Raspberry Pi 4**. Click **Next** if shown.
+   - Under **OS** (or **Choose OS**), click **Other general-purpose OS** → **Ubuntu** → **Ubuntu Desktop 24.04.x LTS (64-bit)**. The last version number may vary; select the **24.04 Desktop** release. Click **Next** if shown.
+   - Under **Storage** (or **Choose Storage**), select your microSD card. Check its name and capacity to identify the correct device.
+   - Continue with **Next**, then **Write** when prompted, and confirm that the selected card can be erased. Complete the Ubuntu account setup on first boot in steps 2–3 below.
+   - Wait for both writing and verification to finish before ejecting the card.
+
+2. Insert the flashed microSD card into the Pi. Connect a monitor, keyboard, and mouse, then power it on and complete Ubuntu's initial setup.
+
+3. Set the username to `tugxx`, replacing `xx` with your two-digit team number. For example, team 5 uses `tug05`. Set the password to `boats0519`.
+
+4. **Connect the Pi to a LAN port on the lab's GLiNet router using an Ethernet cable.** The router's internet connection is already configured, so this provides the Pi with internet access for downloading software. You can complete the remaining steps in this section directly on the Pi using its monitor and keyboard. Your laptop only needs to join the router's network when you connect over SSH in **Section 8.1.b**.
+
+   Router reference: the admin page is [http://192.168.2.5](http://192.168.2.5), and the admin password is `@boats0519`.
+
+5. **On the Pi**, open a terminal and install and enable the SSH server:
+   ```bash
+   sudo apt update
+   sudo apt install -y openssh-server
+   sudo systemctl enable --now ssh
+   ```
+
+6. **On the Pi**, install and open the Raspberry Pi configuration tool:
+   ```bash
+   sudo apt install raspi-config
+   sudo raspi-config
+   ```
+
+7. In the configuration menu, select **Interfacing Options** (called **Interface Options** in some versions):
+   - Select **I2C**, then **Yes** to enable I2C communication for the IMU.
+   - Return to **Interfacing Options** and select **Serial Port**. Select **No** when asked to enable a login shell over serial, then **Yes** when asked to enable the serial port hardware. This makes the UART available for the GPS.
+   - Select **Finish** to exit.
+
+8. Reboot the Pi to apply the I2C and UART settings:
+   ```bash
+   sudo reboot
+   ```
+   After it restarts, log in on the Pi. These interface settings are repeated alongside the hardware instructions in **Sections 8.3.a and 8.3.b**.
+
+9. Find the Pi's Ethernet IPv4 address:
+   ```bash
+   ip -4 addr
+   ```
+   Look for the `inet` address under the connected Ethernet interface, typically `eth0`. Record the address without its `/24` suffix.
+
+   The router assigns this address automatically using DHCP, so it may change after a reboot or reconnection. If SSH stops connecting, check the address again on the Pi. **Section 8.1.c** configures a fixed address for the USB Wi-Fi adapter; the Ethernet address can still change.
+
+10. Continue to **Section 8.1.b** to connect from your laptop and install ROS 2 Jazzy.
+
+#### 8.1.b SSH and Installing ROS 2 Jazzy
+
+1. Connect your laptop to the same GLiNet router as the Pi: join **`GL-MT3000-0a9`** or **`GL-MT3000-0a9-5G`**, using the Wi-Fi password `boats0519`. Keep the Pi connected to the router by Ethernet. From your laptop, use the Pi's current Ethernet IP address from **Section 8.1.a** to connect:
+   ```bash
+   ssh <username>@<ip-address>
+   ```
+   Run all remaining commands in this section on the Pi through this SSH session.
+
+2. Follow the [official ROS 2 Jazzy installation guide for Ubuntu 24.04](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html). Complete the system setup, ROS installation, environment setup, and example verification. Choose **Desktop Install** to include RViz and GUI tools.
+
+   **Include the "Install development tools" step**, even though the guide marks it optional:
+   ```bash
+   sudo apt update && sudo apt install ros-dev-tools
+   ```
+   This installs `colcon` and the build tools needed to build the Stinger workspace.
+
+3. Verify that ROS 2 and `colcon` are available:
+   ```bash
+   source /opt/ros/jazzy/setup.bash
+   ros2 --help
+   colcon --help
+   ```
+   Both help commands should display usage information without a "command not found" error.
+
+#### 8.1.c Installing Wifi Adapter & Setting Static IP
+
+Use the Pi's current Ethernet IP address for SSH until the USB Wi-Fi adapter has been configured below. If that address changes after a reboot, check it again on the Pi with `ip -4 addr`. The static IP configured here applies to the USB Wi-Fi adapter.
+
 1. Installing the adapter
 - Requirements: Pi is powered off; You have USB->SMA adapter; SMA-SMA cable and SMA wifi antenna
 - Plug in all components with the Pi powered off
@@ -1491,7 +1545,7 @@ This section goes through configuring the OS by flashing the microSD card with U
 
   Follow `INSTALL.md` to make sure all the install from source dependencies are installed in Pi. 
 
-  Run `source /opt/ros/humble/setup.bash` at your workspace directory.
+  Run `source /opt/ros/jazzy/setup.bash` at your workspace directory.
 
   Before running `colcon build`, remember to install all dependencies using `rosdep install --from-paths src -y --ignore-src`
 
@@ -1499,7 +1553,7 @@ This section goes through configuring the OS by flashing the microSD card with U
   In the terminal, do the following so the terminal source ROS every time it starts. 
       ```
       nano ~/.bashrc
-      source /opt/ros/humble/setup.bash
+      source /opt/ros/jazzy/setup.bash
       ```
       Add `source /home/username/{workspace}/install/setup.bash` to the script
   - tmux (You don't need tmux if you prefer terminal in VSCode, see next step)
@@ -1516,20 +1570,32 @@ This section goes through configuring the OS by flashing the microSD card with U
 <hr>
 
 #### 8.3.a IMU
-IMU communicates with the Pi via I2C protocal. Make sure to follow the steps below to ensure successful transfer of data. 
+The IMU communicates with the Pi via I2C. As in **Section 8.1.a**, run:
+
+```bash
+sudo raspi-config
+```
+Select **Interfacing Options** (or **Interface Options**) → **I2C** → **Yes**, then select **Finish**. Follow the steps below to configure access to the I2C device.
 
 Topic name: `/stinger/imu/data`
 
 Node name: `imu-node` (will not directly run this node, but you can run this independently if you want to check IMU data.) 
 
+Give your Pi user access to the I2C device. Replace `tug1` with your Pi username:
+```bash
+sudo groupadd i2c
+sudo usermod -aG i2c tug1
+sudo chmod 666 /dev/i2c-1
+sudo nano /etc/udev/rules.d/99-i2c.rules
 ```
-    sudo groupadd i2c
-    sudo usermod -aG i2c tug1
-    sudo chmod 666 /dev/i2c-1
-    sudo nano /etc/udev/rules.d/99-i2c.rules
-    add line: SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
-    sudo udevadm control --reload-rules
-    sudo reboot
+Add this line to the rules file:
+```udev
+SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"
+```
+Save the file, reload the rules, and reboot:
+```bash
+sudo udevadm control --reload-rules
+sudo reboot
 ```
 
 Check I2C permission is granted: `ls -l /dev/i2c-1` You should see something similar `>> crw-rw---- 1 root i2c 89, 1 Feb 8 10:20 /dev/i2c-1`
@@ -1541,8 +1607,16 @@ Topic name: `/stinger/gps/fix`
 
 Node name: `gps-node` (will not directly run this node, but you can run this independently if you want to check GPS data.) 
     
-Make sure you have enabled serial port data transmission following step 4 in Sec \ref{pi-setup}
-    `sudo chmod 666 /dev/serial0`
+As in **Section 8.1.a**, run:
+```bash
+sudo raspi-config
+```
+Select **Interfacing Options** (or **Interface Options**) → **Serial Port**. Select **No** for the serial login shell and **Yes** for the serial port hardware, then select **Finish**. Reboot if prompted.
+
+Give access to the serial port:
+```bash
+sudo chmod 666 /dev/serial0
+```
 
 Check GPS Data Format - `ls /dev/serial*`
     `sudo cat /dev/serial0` (change serial port if needed) -- you will see NMEA messages printing on the terminal if GPS is configure correctly. Likely the information needed is `GPGGA`.
