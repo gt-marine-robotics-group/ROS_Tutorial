@@ -28,6 +28,10 @@ def generate_launch_description():
         ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(localization_launch),
-            launch_arguments={'world': 'empty.world'}.items()
+            # This configuration/remapping check runs without Gazebo or /clock.
+            launch_arguments={
+                'use_sim_time': 'false',
+                'publish_robot_description': 'false',
+            }.items()
         ),
     ])
