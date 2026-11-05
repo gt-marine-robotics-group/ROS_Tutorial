@@ -1,9 +1,11 @@
 # Request
 ### STUDENT CODE HERE
-
+string buoy_name
 ### END STUDENT CODE
 ---
 # Response
 ### STUDENT CODE HERE
-
+float32 x_pos
+float32 y_pos
+bool found
 ### END STUDENT CODE

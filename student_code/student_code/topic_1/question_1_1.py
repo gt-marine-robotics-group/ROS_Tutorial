@@ -19,5 +19,9 @@ class TutorialTopic_1_1:
         self.num_nodes = 5
 
         ### STUDENT CODE HERE
-
+        self.num_nodes = 1
+        self.first_node_name = "/mock_node_q1_1"
+        self.num_topics = 5
+        self.topic_message_type = "geometry_msgs/msg/Twist"
+        self.string_message = "mrg"
         ### END STUDENT CODE

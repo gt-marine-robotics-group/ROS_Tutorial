@@ -19,7 +19,7 @@ class TutorialTopic_1_4_Client(Node):
         request = GetBuoyLocation.Request()
         # TODO: Q1.4.d 
         ### STUDENT CODE HERE
-
+        request.buoy_name = "yellow_buoy"
         ### END STUDENT CODE
         # Send request to service
         future = self.get_buoy_client.call_async(request)
